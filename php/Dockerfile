@@ -15,7 +15,7 @@ COPY docker-entrypoint.sh /usr/local/bin
 RUN apk add --no-cache git libxml2-dev libpng-dev freetype-dev
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/freetype
-RUN docker-php-ext-install mysqli gd xml
+RUN docker-php-ext-install mysqli gd xml sockets
 
 USER www-data
 
