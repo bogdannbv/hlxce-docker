@@ -14,6 +14,8 @@ services:
       MAX_MIND_API_KEY: ${MAX_MIND_API_KEY}
     ports:
       - 27500:27500/udp
+    depends_on:
+      - mysql
 
   nginx:
     build:
@@ -33,6 +35,8 @@ services:
     environment: *env
     expose:
       - 9000
+    depends_on:
+      - mysql
 
   mysql:
     image: mysql:5.7
