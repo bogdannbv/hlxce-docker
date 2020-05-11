@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  cronjob:
+    build:
+      context: cronjob/
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+networks:
+  default:
+      name: hlxce-network

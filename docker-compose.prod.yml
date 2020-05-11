@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  daemon:
+    image: bogdannbv/hlxce-daemon
+    container_name: hlxce-daemon
+    restart: always
+    environment: &env
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      MAX_MIND_API_KEY: ${MAX_MIND_API_KEY}
+    ports:
+      - 27500:27500/udp
+
+  nginx:
+    image: bogdannbv/hlxce-nginx
+    container_name: hlxce-nginx
+    restart: always
+    ports:
+      - 8080:80
+    depends_on:
+      - php
+
+  php:
+    image: bogdannbv/hlxce-php
+    container_name: hlxce-php
+    restart: always
+    environment: *env
+    expose:
+      - 9000
+
+networks:
+  default:
+    name: hlxce-network
